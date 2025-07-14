@@ -1,5 +1,7 @@
 const myLibrary = [];
 
+const libraryContainer = document.querySelector("#libraryContainer")
+
 function Book(uuid, author, title, pages, hasRead) {
   this.uuid = uuid;
   this.author = author;
@@ -13,4 +15,11 @@ function Book(uuid, author, title, pages, hasRead) {
 
 function addBookToLibrary(author, title, pages, hasRead) {
   myLibrary.push(new Book(crypto.randomUUID(), author, title, pages, hasRead))
+  displayBooks()
 }
+
+function displayBooks() {
+    const book = document.createElement("div")
+    book.classList.add("book")
+    libraryContainer.appendChild(book)
+  }
