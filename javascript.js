@@ -2,10 +2,10 @@ const myLibrary = [];
 
 const libraryContainer = document.querySelector("#libraryContainer")
 
-function Book(uuid, author, title, pages, hasRead) {
+function Book(uuid, title, author, pages, hasRead) {
   this.uuid = uuid;
-  this.author = author;
   this.title = title;
+  this.author = author;
   this.pages = pages;
   this.hasRead = hasRead;
   if (!new.target) {
@@ -26,17 +26,16 @@ function displayBooks(bookInfo) {
 }
 
   function addBookInfo(author, title, pages, hasRead) {
-
     const bookInfo = document.createElement("div")
     bookInfo.classList.add("bookInfo")
+
+    titleContainer = document.createElement("h2")
+    titleContainer.textContent = title;
+    bookInfo.appendChild(titleContainer);
     
     authorContainer = document.createElement("p")
     authorContainer.textContent = `Author: ${author}`;
     bookInfo.appendChild(authorContainer);
-
-    titleContainer = document.createElement("p")
-    titleContainer.textContent = `Title: ${title}`;
-    bookInfo.appendChild(titleContainer);
 
     pagesContainer = document.createElement("p")
     pagesContainer.textContent = `Pages: ${pages}`;
@@ -48,3 +47,8 @@ function displayBooks(bookInfo) {
     
     displayBooks(bookInfo)
   }
+
+  addBookToLibrary("t", "h", "3", "yes")
+  addBookToLibrary("t", "h", "3", "yes")
+  addBookToLibrary("t", "h", "3", "yes")
+  addBookToLibrary("t", "h", "3", "yes")
