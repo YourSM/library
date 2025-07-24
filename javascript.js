@@ -1,6 +1,15 @@
-const myLibrary = [];
+const libraryContainer = document.querySelector("#libraryContainer");
 
-const libraryContainer = document.querySelector("#libraryContainer")
+const dialog = document.querySelector("dialog");
+const showButton = document.querySelector("dialog + button");
+
+const form = document.querySelector("form");
+const title = document.getElementById("title");
+const author = document.getElementById("author");
+const pages = document.getElementById("pages");
+const read = document.getElementById("read");
+
+const myLibrary = [];
 
 function Book(uuid, title, author, pages, hasRead) {
   this.uuid = uuid;
@@ -25,7 +34,7 @@ function displayBooks(bookInfo) {
     book.appendChild(bookInfo)
 }
 
-  function addBookInfo(author, title, pages, hasRead) {
+  function addBookInfo(title, author, pages, hasRead) {
     const bookInfo = document.createElement("div")
     bookInfo.classList.add("bookInfo")
 
@@ -48,7 +57,24 @@ function displayBooks(bookInfo) {
     displayBooks(bookInfo)
   }
 
-  addBookToLibrary("t", "h", "3", "yes")
-  addBookToLibrary("t", "h", "3", "yes")
-  addBookToLibrary("t", "h", "3", "yes")
-  addBookToLibrary("t", "h", "3", "yes")
+showButton.addEventListener("click", () => {
+  dialog.showModal();
+});
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  titleValue = title.value;
+  authorValue = author.value;
+  pagesValue = pages.value;
+  readValue = read.checked === true
+    ? "yes"
+    : "no";
+  form.reset();
+  dialog.close();
+  addBookInfo(titleValue, authorValue, pagesValue, readValue);
+});
+
+  addBookToLibrary("t", "h", "3", "yes");
+  addBookToLibrary("t", "h", "3", "yes");
+  addBookToLibrary("t", "h", "3", "yes");
+  addBookToLibrary("t", "h", "3", "yes");
