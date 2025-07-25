@@ -1,7 +1,8 @@
 const libraryContainer = document.querySelector("#libraryContainer");
 
 const dialog = document.querySelector("dialog");
-const showButton = document.querySelector("dialog + button");
+const showButton = document.getElementById("newBook");
+const cancelButton = document.getElementById("cancelButton")
 
 const form = document.querySelector("form");
 const title = document.getElementById("title");
@@ -60,6 +61,11 @@ function displayBooks(bookInfo) {
 showButton.addEventListener("click", () => {
   dialog.showModal();
 });
+
+cancelButton.addEventListener("click", () => {
+  form.reset();
+  dialog.close();
+})
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();

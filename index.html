@@ -10,27 +10,39 @@
 <body>
   <dialog>
     <form method="dialog">
-      <label for="title">Title:</label>
-      <input type="text" name="title" id="title" required>
 
-      <label for="author">Author:</label>
-      <input type="text" name="author" id="author" required>
+      <div class="formContainer">
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title" required>
+      </div>
 
-      <label for="pages">Page Count:</label>
-      <input type="number" name="pages" id="pages" required>
+      <div class="formContainer">
+        <label for="author">Author:</label>
+        <input type="text" name="author" id="author" required>
+      </div>
 
-      <fieldset>
-        <Legend>Have You Read This?</Legend>
-        <label for="read">Yes</label>
-        <input type="radio" name="hasRead" id="read" required>
-      <label for="notRead">No</label>
-      <input type="radio" name="hasRead" id="notRead" required>
-    </fieldset>
+      <div class="formContainer">
+        <label for="pages">Page Count:</label>
+        <input type="number" name="pages" id="pages" required>
+      </div>
 
-    <button type="submit">Submit</button>
+      <div class="formContainer">
+        <fieldset>
+          <Legend>Have You Read This?</Legend>
+          <label for="read">Yes</label>
+          <input type="radio" name="hasRead" id="read" required>
+        <label for="notRead">No</label>
+        <input type="radio" name="hasRead" id="notRead" required>
+            </fieldset>
+      </div>
+      <button id="cancelButton">Cancel</button>
+      <button type="submit">Submit</button>
     </form>
   </dialog>
-  <button>Show Dialog</button>
+    <button id="newBook">
+      ADD A BOOK
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus icon</title><path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg>
+    </button>
   <div id="libraryContainer"></div>
 </body>
 </html>
