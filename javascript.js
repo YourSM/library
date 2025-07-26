@@ -24,8 +24,9 @@ function Book(uuid, title, author, pages, hasRead) {
 }
 
 function addBookToLibrary(author, title, pages, hasRead) {
-  myLibrary.push(new Book(crypto.randomUUID(), author, title, pages, hasRead))
-  addBookInfo(author, title, pages, hasRead)
+  book = new Book(crypto.randomUUID(), author, title, pages, hasRead)
+  myLibrary.push(book)
+  addBookInfo(book)
 }
 
 function displayBooks(bookInfo) {
@@ -35,24 +36,24 @@ function displayBooks(bookInfo) {
     book.appendChild(bookInfo)
 }
 
-  function addBookInfo(title, author, pages, hasRead) {
+  function addBookInfo(book) {
     const bookInfo = document.createElement("div")
     bookInfo.classList.add("bookInfo")
 
     titleContainer = document.createElement("h2")
-    titleContainer.textContent = title;
+    titleContainer.textContent = book.title;
     bookInfo.appendChild(titleContainer);
     
     authorContainer = document.createElement("p")
-    authorContainer.textContent = `Author: ${author}`;
+    authorContainer.textContent = `Author: ${book.author}`;
     bookInfo.appendChild(authorContainer);
 
     pagesContainer = document.createElement("p")
-    pagesContainer.textContent = `Pages: ${pages}`;
+    pagesContainer.textContent = `Pages: ${book.pages}`;
     bookInfo.appendChild(pagesContainer);
 
     hasReadContainer = document.createElement("p")
-    hasReadContainer.textContent = `Read: ${hasRead}`;
+    hasReadContainer.textContent = `Read: ${book.hasRead}`;
     bookInfo.appendChild(hasReadContainer);
     
     displayBooks(bookInfo)
@@ -77,7 +78,7 @@ form.addEventListener("submit", (event) => {
     : "no";
   form.reset();
   dialog.close();
-  addBookInfo(titleValue, authorValue, pagesValue, readValue);
+  addBookToLibrary(titleValue, authorValue, pagesValue, readValue);
 });
 
   addBookToLibrary("t", "h", "3", "yes");
