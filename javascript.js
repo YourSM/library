@@ -1,4 +1,5 @@
-const libraryContainer = document.querySelector("#libraryContainer");
+const body = document.querySelector("body")
+let libraryContainer = document.querySelector("#libraryContainer");
 
 const dialog = document.querySelector("dialog");
 const showButton = document.getElementById("newBook");
@@ -29,35 +30,63 @@ function addBookToLibrary(author, title, pages, hasRead) {
   addBookInfo(book)
 }
 
-function displayBooks(bookInfo) {
+function displayBooks(bookInfo, uuid) {
     const book = document.createElement("div")
     book.classList.add("book")
     libraryContainer.appendChild(book)
     book.appendChild(bookInfo)
+    book.setAttribute("data-uuid", uuid)
 }
 
   function addBookInfo(book) {
-    const bookInfo = document.createElement("div")
-    bookInfo.classList.add("bookInfo")
 
-    titleContainer = document.createElement("h2")
-    titleContainer.textContent = book.title;
-    bookInfo.appendChild(titleContainer);
+    libraryContainer.remove()
+    libraryContainer = document.createElement("div")
+    libraryContainer.setAttribute("id", "libraryContainer")
+    body.appendChild(libraryContainer)
     
-    authorContainer = document.createElement("p")
-    authorContainer.textContent = `Author: ${book.author}`;
-    bookInfo.appendChild(authorContainer);
-
-    pagesContainer = document.createElement("p")
-    pagesContainer.textContent = `Pages: ${book.pages}`;
-    bookInfo.appendChild(pagesContainer);
-
-    hasReadContainer = document.createElement("p")
-    hasReadContainer.textContent = `Read: ${book.hasRead}`;
-    bookInfo.appendChild(hasReadContainer);
-    
-    displayBooks(bookInfo)
+    for(item in myLibrary) {
+      let book2 = document.querySelector("book")
+      console.log(book2)
+      const bookInfo = document.createElement("div")
+      bookInfo.classList.add("bookInfo")
+  
+  
+      titleContainer = document.createElement("h2")
+      titleContainer.textContent = book.title;
+      bookInfo.appendChild(titleContainer);
+      
+      authorContainer = document.createElement("p")
+      authorContainer.textContent = `Author: ${book.author}`;
+      bookInfo.appendChild(authorContainer);
+  
+      pagesContainer = document.createElement("p")
+      pagesContainer.textContent = `Pages: ${book.pages}`;
+      bookInfo.appendChild(pagesContainer);
+  
+      hasReadContainer = document.createElement("p")
+      hasReadContainer.textContent = `Read: ${book.hasRead}`;
+      bookInfo.appendChild(hasReadContainer);
+  
+      deleteBook = document.createElement("button")
+      deleteBook.textContent = "Delete Book"
+      bookInfo.appendChild(deleteBook)
+  
+      
+      
+      displayBooks(bookInfo, book.uuid)
+    }
   }
+
+  
+
+ 
+
+  function removeBook(uuid) {
+    book = document.querySelector(`[data-uuid="${uuid}"]`)
+    book.remove()
+  }
+
 
 showButton.addEventListener("click", () => {
   dialog.showModal();
