@@ -1,8 +1,7 @@
 const body = document.querySelector("body")
-let libraryContainer = document.querySelector("#libraryContainer");
 
 const dialog = document.querySelector("dialog");
-const showButton = document.getElementById("newBook");
+const showButton = document.getElementById("newBookButton");
 const cancelButton = document.getElementById("cancelButton")
 
 const form = document.querySelector("form");
@@ -13,7 +12,7 @@ const read = document.getElementById("read");
 
 const myLibrary = [];
 
-function Book(uuid, title, author, pages, hasRead) {
+function Book(uuid, author, title, pages, hasRead) {
   this.uuid = uuid;
   this.title = title;
   this.author = author;
@@ -25,33 +24,29 @@ function Book(uuid, title, author, pages, hasRead) {
 }
 
 function addBookToLibrary(author, title, pages, hasRead) {
-  book = new Book(crypto.randomUUID(), author, title, pages, hasRead)
+  const book = new Book(crypto.randomUUID(), author, title, pages, hasRead)
   myLibrary.push(book)
   addBookInfo(book)
 }
 
-function displayBooks(bookInfo, uuid) {
-    const book = document.createElement("div")
-    book.classList.add("book")
-    libraryContainer.appendChild(book)
-    book.appendChild(bookInfo)
-    book.setAttribute("data-uuid", uuid)
-}
-
-  function addBookInfo(book) {
+  function addBookInfo() {
 
     libraryContainer.remove()
     libraryContainer = document.createElement("div")
     libraryContainer.setAttribute("id", "libraryContainer")
     body.appendChild(libraryContainer)
     
-    for(item in myLibrary) {
-      let book2 = document.querySelector("book")
-      console.log(book2)
+  
+    myLibrary.forEach(book => {
       const bookInfo = document.createElement("div")
       bookInfo.classList.add("bookInfo")
-  
-  
+
+      const newBook = document.createElement("div")
+      newBook.setAttribute("data-uuid", book.uuid)
+      newBook.classList.add("book")
+      newBook.appendChild(bookInfo)
+      libraryContainer.appendChild(newBook)
+      
       titleContainer = document.createElement("h2")
       titleContainer.textContent = book.title;
       bookInfo.appendChild(titleContainer);
@@ -71,22 +66,18 @@ function displayBooks(bookInfo, uuid) {
       deleteBook = document.createElement("button")
       deleteBook.textContent = "Delete Book"
       bookInfo.appendChild(deleteBook)
-  
-      
-      
-      displayBooks(bookInfo, book.uuid)
-    }
+      deleteBook.addEventListener("click", () => {
+        removeBook()
+  })
+
+  function removeBook() {
+    myLibrary.splice(myLibrary.findIndex(book => book.uuid === newBook.dataset.uuid), 1)
+    console.log(newBook.dataset.uuid)
+    targetedBook = document.querySelector(`[data-uuid="${newBook.dataset.uuid}"]`)
+    targetedBook.remove()
   }
-
-  
-
- 
-
-  function removeBook(uuid) {
-    book = document.querySelector(`[data-uuid="${uuid}"]`)
-    book.remove()
+   })
   }
-
 
 showButton.addEventListener("click", () => {
   dialog.showModal();
@@ -110,7 +101,7 @@ form.addEventListener("submit", (event) => {
   addBookToLibrary(titleValue, authorValue, pagesValue, readValue);
 });
 
-  addBookToLibrary("t", "h", "3", "yes");
+  addBookToLibrary("g", "h", "3", "yes");
   addBookToLibrary("t", "h", "3", "yes");
   addBookToLibrary("t", "h", "3", "yes");
   addBookToLibrary("t", "h", "3", "yes");
