@@ -12,6 +12,19 @@ const read = document.getElementById("read");
 
 const myLibrary = [];
 
+Book.prototype.toggleRead = function(targetedBook) {
+  index = myLibrary.findIndex(book => book.uuid === targetedBook.dataset.uuid)
+
+  myLibrary[index].hasRead = myLibrary[index].hasRead === "yes"
+  ? "no"
+  : "yes"
+
+  readStatus = document.querySelector(`[data-uuid="${targetedBook.dataset.uuid}"] .hasRead`)
+  readStatus.textContent = readStatus.textContent === "Read: yes"
+  ? "Read: no"
+  : "Read: yes"
+}
+
 function Book(uuid, author, title, pages, hasRead) {
   this.uuid = uuid;
   this.title = title;
@@ -26,7 +39,7 @@ function Book(uuid, author, title, pages, hasRead) {
 function addBookToLibrary(author, title, pages, hasRead) {
   const book = new Book(crypto.randomUUID(), author, title, pages, hasRead)
   myLibrary.push(book)
-  addBookInfo(book)
+  addBookInfo()
 }
 
   function addBookInfo() {
@@ -61,6 +74,7 @@ function addBookToLibrary(author, title, pages, hasRead) {
   
       hasReadContainer = document.createElement("p")
       hasReadContainer.textContent = `Read: ${book.hasRead}`;
+      hasReadContainer.classList.add("hasRead")
       bookInfo.appendChild(hasReadContainer);
   
       deleteBook = document.createElement("button")
@@ -70,9 +84,13 @@ function addBookToLibrary(author, title, pages, hasRead) {
         removeBook()
   })
 
+  toggleReadButton = document.createElement("button");
+  toggleReadButton.textContent = "Change Read Status";
+  bookInfo.appendChild(toggleReadButton);
+  toggleReadButton.addEventListener("click", () => book.toggleRead(newBook));
+
   function removeBook() {
     myLibrary.splice(myLibrary.findIndex(book => book.uuid === newBook.dataset.uuid), 1)
-    console.log(newBook.dataset.uuid)
     targetedBook = document.querySelector(`[data-uuid="${newBook.dataset.uuid}"]`)
     targetedBook.remove()
   }
