@@ -20,7 +20,7 @@ button {
   background-color: #37746e;
 }
 
-#newBook {
+#newBookButton {
   display: flex;
   justify-content: center;
   align-items: center;
