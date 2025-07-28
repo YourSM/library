@@ -104,7 +104,7 @@ button:focus {
 
 #libraryContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   gap: 1rem;
   margin: 10px;
 }
@@ -136,8 +136,7 @@ button:focus {
 
 .book button {
   background-color: #144268;
-  width: 6rem;
-  height: 2rem;
+  max-width: 6rem;
 }
 
 .hasRead {
