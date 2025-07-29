@@ -119,7 +119,7 @@ form.addEventListener("submit", (event) => {
   addBookToLibrary(titleValue, authorValue, pagesValue, readValue);
 });
 
-  addBookToLibrary("g", "h", "3", "yes");
-  addBookToLibrary("t", "h", "3", "yes");
-  addBookToLibrary("t", "h", "3", "yes");
-  addBookToLibrary("t", "h", "3", "yes");
+  addBookToLibrary("Herman Merville", "Moby Dick", "378", "yes");
+  addBookToLibrary("Aki Hamazi", "Bocchi the Rock", "128", "yes");
+  addBookToLibrary("Charles Dickens", "Great Expectations", "328", "no");
+  addBookToLibrary("Kazuo Ishiguro", "Never Let Me Go", "288", "yes");
