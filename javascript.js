@@ -25,7 +25,7 @@ Book.prototype.toggleRead = function(targetedBook) {
   : "Read: yes"
 }
 
-function Book(uuid, author, title, pages, hasRead) {
+function Book(uuid, title, author, pages, hasRead) {
   this.uuid = uuid;
   this.title = title;
   this.author = author;
@@ -36,8 +36,8 @@ function Book(uuid, author, title, pages, hasRead) {
   }
 }
 
-function addBookToLibrary(author, title, pages, hasRead) {
-  const book = new Book(crypto.randomUUID(), author, title, pages, hasRead)
+function addBookToLibrary(title, author, pages, hasRead) {
+  const book = new Book(crypto.randomUUID(), title, author, pages, hasRead)
   myLibrary.push(book)
   addBookInfo()
 }
@@ -119,7 +119,7 @@ form.addEventListener("submit", (event) => {
   addBookToLibrary(titleValue, authorValue, pagesValue, readValue);
 });
 
-  addBookToLibrary("Herman Merville", "Moby Dick", "378", "yes");
-  addBookToLibrary("Aki Hamazi", "Bocchi the Rock", "128", "yes");
-  addBookToLibrary("Charles Dickens", "Great Expectations", "328", "no");
-  addBookToLibrary("Kazuo Ishiguro", "Never Let Me Go", "288", "yes");
+  addBookToLibrary("Moby Dick", "Herman Merville", "378", "yes");
+  addBookToLibrary("Bocchi the Rock", "Aki Hamazi", "128", "yes");
+  addBookToLibrary("Great Expectations", "Charles Dickens", "328", "no");
+  addBookToLibrary("Never Let Me Go", "Kazuo Ishiguro", "288", "yes");
